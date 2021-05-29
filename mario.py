@@ -14,12 +14,38 @@ class GameSprite(sprite.Sprite):
         self.rect.y = player_y
     def reset(self):
         window.blit(self.image, (self.rect.x,self.rect.y))
-igrok = GameSprite('goose1.png',300,300)
-f1 = transform.scale(image.load("fon.jpg"),(700, 500))
-f2 = transform.scale(image.load("fon.jpg"),(700, 500))
-f3 = transform.scale(image.load("fon.jpg"),(700, 500))
-f4 = transform.scale(image.load("fon.jpg"),(700, 500))
-f5 = transform.scale(image.load("fon.jpg"),(700, 500))
+        
+level = [
+       "-------------------------",
+       "-                       -",
+       "-                       -",
+       "-                       -",
+       "-            --         -",
+       "-                       -",
+       "--                      -",
+       "-                       -",
+       "-                   --- -",
+       "-                       -",
+       "-                       -",
+       "-      ---     - -      -",
+       "-------------------------",
+       "-------------------------",
+       "-                       -",
+       "-                -      -",
+       "-                   --  -",
+       "-                       -",
+       "-                       -",
+       "-------------------------"]
+
+igrok = GameSprite('cactus.png',320,320)
+f1 = transform.scale(image.load("fon.png"),(700, 500))
+f2 = transform.scale(image.load("fon.png"),(700, 500))
+f3 = transform.scale(image.load("fon.png"),(700, 500))
+f4 = transform.scale(image.load("fon.png"),(700, 500))
+f5 = transform.scale(image.load("fon.png"),(700, 500))
+width = 32
+height = 32
+colorp = "#FF6262"
 
 x1 = 0
 y1 = 0
@@ -30,6 +56,18 @@ while game:
     window.blit(f3,(x1+700,0))
     #window.blit(f4,(y1,0))
     #window.blit(f5,(y1+700,0))
+
+    x=y=0 
+    for row in level: 
+        for col in row: 
+            if col == "-":
+                pf = Surface((width,height))
+                pf.fill(Color(colorp)) 
+                window.blit(pf,(x,y))
+                    
+            x += width 
+        y += height    
+        x = 0 
 
     for e in event.get():
         if e.type == QUIT:
@@ -47,8 +85,8 @@ while game:
         x1 = 0
     if x1<-700:
         x1 = 0
-    if y1>300:
-        y1 = 300
+    if y1>320:
+        y1 = 320
     igrok.reset()
     igrok.rect.y=y1
     display.update()
